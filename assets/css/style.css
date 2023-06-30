@@ -1141,7 +1141,9 @@ main {
   filter: grayscale(1) invert(1);
 }
 
-.contact-form { margin-bottom: 10px; }
+.contact-form { 
+  color: var(--white-1);
+  margin-bottom: 10px; }
 
 .form-title { margin-bottom: 20px; }
 
@@ -1212,16 +1214,35 @@ textarea.form-input::-webkit-resizer { display: none; }
 
 .form-btn:hover::before { background: var(--bg-gradient-yellow-2); }
 
-.form-btn:disabled {
+/* .form-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+} */
+
+.formDisabledSubmitBtn{
   opacity: 0.7;
   cursor: not-allowed;
 }
 
+.loading-spinner {
+  animation: rotate 1.5s linear infinite;
+}
+
+
+
+@keyframes rotate {
+  to {
+    transform: rotate(360deg);
+  }
+}
 .form-btn:disabled:hover { background: var(--border-gradient-onyx); }
 
 .form-btn:disabled:hover::before { background: var(--bg-gradient-jet); }
 
 
+#successMessage{
+  margin-bottom: 10px;
+}
 
 
 
