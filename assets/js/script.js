@@ -37,7 +37,7 @@ function submitForm(event) {
   formSubmitBtnElement.classList.add("formDisabledSubmitBtn");
   formButtonIconElement.classList.add("loading-spinner");
 
-  fetch("https://formsubmit.co/contact@subhamjangid.in", {
+  fetch("https://formsubmit.co/contact@shubhamjangid.in", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
