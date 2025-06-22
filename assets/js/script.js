@@ -37,28 +37,36 @@ function submitForm(event) {
   formSubmitBtnElement.classList.add("formDisabledSubmitBtn");
   formButtonIconElement.classList.add("loading-spinner");
 
-  fetch("https://formsubmit.co/contact@shubhamjangid.in", {
+  // Create FormData for Web3Forms
+  const formData = new FormData();
+  formData.append("access_key", "e02c5988-11b4-4118-8c98-7fc5ebdfe1bf"); // Replace with your actual access key
+  formData.append("name", name);
+  formData.append("email", email);
+  formData.append("message", message);
+  formData.append("subject", "New Contact Form Submission from Portfolio");
+
+  // Optional: Add additional fields
+  formData.append("from_name", name);
+  formData.append("replyto", email);
+
+  fetch("https://api.web3forms.com/submit", {
     method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      name,
-      email,
-      message,
-    }),
+    body: formData,
   })
-    .then((response) => {
-      if (response.ok) {
+    .then((response) => response.json())
+    .then((data) => {
+      if (data.success) {
         successMessageElement.innerText =
           "Thank you for your submission! I will be in touch soon.";
         form.reset();
       } else {
-        throw new Error("Error submitting form.");
+        throw new Error(data.message || "Error submitting form.");
       }
     })
     .catch((error) => {
-      successMessageElement.innerText(error);
+      successMessageElement.innerText =
+        "Error sending message. Please try again.";
+      console.error("Form submission error:", error);
     })
     .finally(() => {
       formButtonIconElement.setAttribute("name", "paper-plane");
